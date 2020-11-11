@@ -208,8 +208,8 @@
 
         <ImageView
             android:id="@+id/actor_photo1"
-            android:layout_width="@dimen/actor_photo_side"
-            android:layout_height="@dimen/actor_photo_side"
+            android:layout_width="@dimen/actor_photo_side_land"
+            android:layout_height="@dimen/actor_photo_side_land"
             android:layout_marginStart="@dimen/dimen_4x"
             android:layout_marginTop="7dp"
             android:contentDescription="@null"
@@ -220,10 +220,11 @@
 
         <TextView
             android:id="@+id/actor_name1"
-            android:layout_width="@dimen/actor_photo_side"
+            android:layout_width="@dimen/actor_photo_side_land"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:ellipsize="end"
+            android:lines="2"
             android:maxLines="2"
             android:text="@string/robert_downey_jr"
             android:textColor="@color/actor_name"
@@ -235,8 +236,8 @@
 
         <ImageView
             android:id="@+id/actor_photo2"
-            android:layout_width="@dimen/actor_photo_side"
-            android:layout_height="@dimen/actor_photo_side"
+            android:layout_width="@dimen/actor_photo_side_land"
+            android:layout_height="@dimen/actor_photo_side_land"
             android:layout_marginStart="@dimen/dimen_2x"
             android:contentDescription="@null"
             android:src="@drawable/evans"
@@ -246,11 +247,12 @@
 
         <TextView
             android:id="@+id/actor_name2"
-            android:layout_width="@dimen/actor_photo_side"
+            android:layout_width="@dimen/actor_photo_side_land"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
+            android:lines="2"
             android:maxLines="2"
             android:text="@string/chris_evans"
             android:textColor="@color/actor_name"
@@ -262,8 +264,8 @@
 
         <ImageView
             android:id="@+id/actor_photo3"
-            android:layout_width="@dimen/actor_photo_side"
-            android:layout_height="@dimen/actor_photo_side"
+            android:layout_width="@dimen/actor_photo_side_land"
+            android:layout_height="@dimen/actor_photo_side_land"
             android:layout_marginStart="@dimen/dimen_2x"
             android:contentDescription="@null"
             android:src="@drawable/ruffalo"
@@ -273,11 +275,12 @@
 
         <TextView
             android:id="@+id/actor_name3"
-            android:layout_width="@dimen/actor_photo_side"
+            android:layout_width="@dimen/actor_photo_side_land"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
+            android:lines="2"
             android:maxLines="2"
             android:text="@string/mark_ruffalo"
             android:textColor="@color/actor_name"
@@ -289,8 +292,8 @@
 
         <ImageView
             android:id="@+id/actor_photo4"
-            android:layout_width="@dimen/actor_photo_side"
-            android:layout_height="@dimen/actor_photo_side"
+            android:layout_width="@dimen/actor_photo_side_land"
+            android:layout_height="@dimen/actor_photo_side_land"
             android:layout_marginStart="@dimen/dimen_2x"
             android:contentDescription="@null"
             android:src="@drawable/hemsworth"
@@ -299,11 +302,12 @@
 
         <TextView
             android:id="@+id/actor_name4"
-            android:layout_width="@dimen/actor_photo_side"
+            android:layout_width="@dimen/actor_photo_side_land"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
+            android:lines="2"
             android:maxLines="2"
             android:text="@string/chris_hemsworth"
             android:textColor="@color/actor_name"

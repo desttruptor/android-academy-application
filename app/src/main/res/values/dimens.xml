@@ -10,4 +10,5 @@
     <dimen name="dimen_2x">8dp</dimen>
 
     <dimen name="actor_photo_side">80dp</dimen>
+    <dimen name="actor_photo_side_land">140dp</dimen>
 </resources>
