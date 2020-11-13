@@ -42,7 +42,7 @@
             android:gravity="center_vertical"
             android:includeFontPadding="false"
             android:text="@string/details_activity_button_back"
-            android:textColor="@color/white_text"
+            android:textColor="@color/back_button_color"
             android:textSize="12sp"
             android:textStyle="normal"
             app:drawableStartCompat="@drawable/button_back_arrow"
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="226dp"
+            android:layout_marginTop="260dp"
             android:text="@string/age_pegi"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_default"
@@ -66,40 +66,35 @@
             android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_4x"
-            android:layout_marginTop="@dimen/dimen_3x"
             android:layout_marginEnd="@dimen/dimen_4x"
             android:text="@string/avengers_endgame"
             android:textColor="@color/white_text"
             android:textSize="@dimen/text_size_movie_title"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_age_pg" />
+            app:layout_constraintStart_toStartOf="@+id/tv_age_pg"
+            app:layout_constraintTop_toBottomOf="@+id/iv_movie_backdrop" />
 
         <TextView
             android:id="@+id/tv_tagline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_4x"
             android:layout_marginTop="@dimen/dimen_1x"
-            android:layout_marginEnd="@dimen/dimen_4x"
             android:text="@string/tagline"
             android:textColor="@color/tagline_tv_color"
             android:textSize="@dimen/text_size_default"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
         <ImageView
             android:id="@+id/star1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_4x"
             android:layout_marginTop="@dimen/dimen_2x"
             android:contentDescription="@null"
             android:src="@drawable/ic_star_icon_marked"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_tagline"
             app:layout_constraintTop_toBottomOf="@+id/tv_tagline" />
 
         <ImageView
@@ -161,70 +156,65 @@
             android:id="@+id/storyline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_4x"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="@dimen/dimen_4x"
             android:includeFontPadding="false"
             android:text="@string/storyline"
             android:textColor="@color/white_text"
             android:textSize="@dimen/text_size_default"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_tagline"
+            app:layout_constraintStart_toStartOf="@+id/star1"
             app:layout_constraintTop_toBottomOf="@id/reviews" />
 
         <TextView
             android:id="@+id/film_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_4x"
             android:layout_marginTop="@dimen/dimen_1x"
-            android:layout_marginEnd="@dimen/dimen_4x"
             android:alpha=".75"
             android:includeFontPadding="false"
             android:lineSpacingExtra="4sp"
             android:text="@string/story"
             android:textColor="@color/white_text"
             android:textSize="@dimen/text_size_default"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/storyline"
+            app:layout_constraintStart_toStartOf="@id/storyline"
             app:layout_constraintTop_toBottomOf="@id/storyline" />
 
         <TextView
             android:id="@+id/cast"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_4x"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="@dimen/dimen_4x"
             android:includeFontPadding="false"
             android:text="@string/cast"
             android:textColor="@color/white_text"
             android:textSize="@dimen/text_size_default"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/film_description"
+            app:layout_constraintStart_toStartOf="@+id/film_description"
             app:layout_constraintTop_toBottomOf="@+id/film_description" />
 
         <ImageView
             android:id="@+id/actor_photo1"
-            android:layout_width="@dimen/actor_photo_side_land"
-            android:layout_height="@dimen/actor_photo_side_land"
-            android:layout_marginStart="@dimen/dimen_4x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
+            android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:src="@drawable/downey"
             app:layout_constraintEnd_toStartOf="@+id/actor_photo2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cast" />
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@+id/cast"
+            app:layout_constraintTop_toBottomOf="@id/cast"
+            app:layout_constraintWidth_percent=".22" />
 
         <TextView
             android:id="@+id/actor_name1"
-            android:layout_width="@dimen/actor_photo_side_land"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:ellipsize="end"
-            android:lines="2"
             android:maxLines="2"
             android:text="@string/robert_downey_jr"
             android:textColor="@color/actor_name"
@@ -236,23 +226,23 @@
 
         <ImageView
             android:id="@+id/actor_photo2"
-            android:layout_width="@dimen/actor_photo_side_land"
-            android:layout_height="@dimen/actor_photo_side_land"
-            android:layout_marginStart="@dimen/dimen_2x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:src="@drawable/evans"
             app:layout_constraintEnd_toStartOf="@+id/actor_photo3"
             app:layout_constraintStart_toEndOf="@+id/actor_photo1"
-            app:layout_constraintTop_toTopOf="@id/actor_photo1" />
+            app:layout_constraintTop_toTopOf="@id/actor_photo1"
+            app:layout_constraintWidth_percent=".22" />
 
         <TextView
             android:id="@+id/actor_name2"
-            android:layout_width="@dimen/actor_photo_side_land"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
-            android:lines="2"
             android:maxLines="2"
             android:text="@string/chris_evans"
             android:textColor="@color/actor_name"
@@ -264,23 +254,23 @@
 
         <ImageView
             android:id="@+id/actor_photo3"
-            android:layout_width="@dimen/actor_photo_side_land"
-            android:layout_height="@dimen/actor_photo_side_land"
-            android:layout_marginStart="@dimen/dimen_2x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:src="@drawable/ruffalo"
             app:layout_constraintEnd_toStartOf="@+id/actor_photo4"
             app:layout_constraintStart_toEndOf="@+id/actor_photo2"
-            app:layout_constraintTop_toTopOf="@id/actor_photo2" />
+            app:layout_constraintTop_toTopOf="@id/actor_photo2"
+            app:layout_constraintWidth_percent=".22" />
 
         <TextView
             android:id="@+id/actor_name3"
-            android:layout_width="@dimen/actor_photo_side_land"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
-            android:lines="2"
             android:maxLines="2"
             android:text="@string/mark_ruffalo"
             android:textColor="@color/actor_name"
@@ -292,22 +282,23 @@
 
         <ImageView
             android:id="@+id/actor_photo4"
-            android:layout_width="@dimen/actor_photo_side_land"
-            android:layout_height="@dimen/actor_photo_side_land"
-            android:layout_marginStart="@dimen/dimen_2x"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:src="@drawable/hemsworth"
+            app:layout_constraintEnd_toEndOf="@+id/cast"
             app:layout_constraintStart_toEndOf="@+id/actor_photo3"
-            app:layout_constraintTop_toTopOf="@id/actor_photo3" />
+            app:layout_constraintTop_toTopOf="@id/actor_photo3"
+            app:layout_constraintWidth_percent=".22" />
 
         <TextView
             android:id="@+id/actor_name4"
-            android:layout_width="@dimen/actor_photo_side_land"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
-            android:lines="2"
             android:maxLines="2"
             android:text="@string/chris_hemsworth"
             android:textColor="@color/actor_name"
