@@ -15,11 +15,11 @@ class FragmentMovieDetails : Fragment() {
         // textView is used as a button
         val tvBack: TextView = rootView.findViewById(R.id.tv_back)
         tvBack.setOnClickListener{
-            activity
-                ?.supportFragmentManager
-                ?.beginTransaction()
-                ?.remove(this)
-                ?.commit()
+            requireActivity()
+                .supportFragmentManager
+                .beginTransaction()
+                .remove(this)
+                .commit()
         }
 
         return rootView
