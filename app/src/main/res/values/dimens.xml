@@ -4,8 +4,8 @@
     <dimen name="text_size_default">14sp</dimen>
     <dimen name="text_size_actor_name">12sp</dimen>
 
-    <dimen name="dimen_3x">12dp</dimen>
     <dimen name="dimen_4x">16dp</dimen>
-    <dimen name="dimen_1x">4dp</dimen>
+    <dimen name="dimen_3x">12dp</dimen>
     <dimen name="dimen_2x">8dp</dimen>
+    <dimen name="dimen_1x">4dp</dimen>
 </resources>

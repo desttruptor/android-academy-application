@@ -161,16 +161,16 @@
         <ImageView
             android:id="@+id/actor_photo1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="7dp"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:src="@drawable/downey"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/actor_photo2"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="@+id/cast"
-            app:layout_constraintTop_toBottomOf="@id/cast"
-            app:layout_constraintWidth_percent=".22" />
+            app:layout_constraintTop_toBottomOf="@id/cast" />
 
         <TextView
             android:id="@+id/actor_name1"
@@ -191,14 +191,15 @@
         <ImageView
             android:id="@+id/actor_photo2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dimen_1x"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:src="@drawable/evans"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/actor_photo3"
             app:layout_constraintStart_toEndOf="@+id/actor_photo1"
-            app:layout_constraintTop_toTopOf="@id/actor_photo1"
-            app:layout_constraintWidth_percent=".22" />
+            app:layout_constraintTop_toTopOf="@id/actor_photo1" />
 
         <TextView
             android:id="@+id/actor_name2"
@@ -219,14 +220,15 @@
         <ImageView
             android:id="@+id/actor_photo3"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dimen_1x"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:src="@drawable/ruffalo"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/actor_photo4"
             app:layout_constraintStart_toEndOf="@+id/actor_photo2"
-            app:layout_constraintTop_toTopOf="@id/actor_photo2"
-            app:layout_constraintWidth_percent=".22" />
+            app:layout_constraintTop_toTopOf="@id/actor_photo2" />
 
         <TextView
             android:id="@+id/actor_name3"
@@ -247,14 +249,15 @@
         <ImageView
             android:id="@+id/actor_photo4"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/dimen_1x"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:src="@drawable/hemsworth"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="@+id/cast"
             app:layout_constraintStart_toEndOf="@+id/actor_photo3"
-            app:layout_constraintTop_toTopOf="@id/actor_photo3"
-            app:layout_constraintWidth_percent=".22" />
+            app:layout_constraintTop_toTopOf="@id/actor_photo3" />
 
         <TextView
             android:id="@+id/actor_name4"
