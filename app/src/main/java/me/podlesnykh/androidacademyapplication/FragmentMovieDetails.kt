@@ -10,7 +10,7 @@ import android.widget.TextView
 
 class FragmentMovieDetails : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.activity_movie_details, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_movie_details, container, false)
 
         // textView is used as a button
         val tvBack: TextView = rootView.findViewById(R.id.tv_back)

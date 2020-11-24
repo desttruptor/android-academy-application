@@ -18,4 +18,11 @@
         <item name="colorControlNormal">#6d6d80</item>
         <item name="colorControlActivated">#ff3365</item>
     </style>
+
+    <style name="small.rating.bar.preview" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="colorControlNormal">#6d6d80</item>
+        <item name="colorControlActivated">#ff3365</item>
+        <item name="maxHeight">8dp</item>
+        <item name="minHeight">8dp</item>
+    </style>
 </resources>
