@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_1x"
             android:includeFontPadding="false"
-            android:text="@string/_125_reviews"
+            android:text="@string/reviews_counter"
             android:textColor="@color/reviews_color"
             android:textSize="8sp"
             android:textStyle="bold"
