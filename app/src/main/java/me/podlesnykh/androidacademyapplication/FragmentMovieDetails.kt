@@ -11,13 +11,13 @@ import me.podlesnykh.androidacademyapplication.databinding.FragmentMovieDetailsB
 class FragmentMovieDetails : Fragment() {
 
     private var _binding: FragmentMovieDetailsBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
-        val view = binding?.root
+        val view = binding.root
 
-        binding?.tvBack?.setOnClickListener {
+        binding.tvBack.setOnClickListener {
             findNavController().navigate(R.id.navigate_to_movies_list)
         }
 
