@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_4x"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/dimen_6x"
             android:drawablePadding="@dimen/dimen_2x"
             android:includeFontPadding="false"
             android:text="@string/label_movies_list"
@@ -32,7 +32,7 @@
             layout="@layout/movies_list_movies_item"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dimen_6x"
+            android:layout_marginTop="@dimen/dimen_5x"
             app:layout_constraintStart_toStartOf="@+id/tv_label_movies_list"
             app:layout_constraintTop_toBottomOf="@id/tv_label_movies_list" />
 
