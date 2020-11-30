@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_4x"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="30dp"
             android:drawablePadding="@dimen/dimen_2x"
             android:includeFontPadding="false"
             android:text="@string/label_movies_list"
