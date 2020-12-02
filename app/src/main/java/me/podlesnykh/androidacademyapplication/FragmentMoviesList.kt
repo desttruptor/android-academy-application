@@ -6,6 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import me.podlesnykh.androidacademyapplication.adapters.MovieListAdapter
+import me.podlesnykh.androidacademyapplication.data.Movie
+import me.podlesnykh.androidacademyapplication.data.MovieStorage
 import me.podlesnykh.androidacademyapplication.databinding.FragmentMoviesListBinding
 
 class FragmentMoviesList : Fragment() {
@@ -17,9 +22,7 @@ class FragmentMoviesList : Fragment() {
         _binding = FragmentMoviesListBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.movieItemContainer.movieItemCardView.setOnClickListener {
-            findNavController().navigate(R.id.navigate_to_movie_item)
-        }
+        bindRecyclerView()
 
         return view
     }
@@ -27,5 +30,15 @@ class FragmentMoviesList : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun bindRecyclerView() {
+        binding.rvMoviesList?.adapter = MovieListAdapter(MovieStorage.getMovies())
+        binding.rvMoviesList?.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+        binding.rvMoviesList?.addItemDecoration(
+            DividerItemDecoration(
+                context, DividerItemDecoration.VERTICAL
+            )
+        )
     }
 }

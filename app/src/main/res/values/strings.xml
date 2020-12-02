@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Android Academy Application</string>
     <string name="details_activity_button_back">Back</string>
-    <string name="age_pegi">13+</string>
     <string name="avengers_endgame">Avengers:\nEnd Game</string>
     <string name="tagline">Action, Adventure, Fantasy</string>
     <string name="reviews_counter">125 REVIEWS</string>
@@ -17,4 +16,6 @@
     <string name="action_adventure_drama">Action, Adventure, Drama</string>
     <string name="avengers_end_game">Avengers: End Game</string>
     <string name="_137_MIN">137 MIN</string>
+    <string name="string_reviews">reviews</string>
+    <string name="string_duration">min</string>
 </resources>
