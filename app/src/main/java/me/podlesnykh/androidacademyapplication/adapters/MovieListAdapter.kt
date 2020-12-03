@@ -9,7 +9,7 @@ import me.podlesnykh.androidacademyapplication.R
 import me.podlesnykh.androidacademyapplication.data.Movie
 import me.podlesnykh.androidacademyapplication.databinding.MoviesListMovieItemBinding
 
-class MovieListAdapter(val movies: List<Movie>) : RecyclerView.Adapter<MovieListViewHolder>() {
+class MovieListAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<MovieListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.movies_list_movie_item, parent, false)
@@ -24,7 +24,7 @@ class MovieListAdapter(val movies: List<Movie>) : RecyclerView.Adapter<MovieList
 }
 
 class MovieListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val binding: MoviesListMovieItemBinding = MoviesListMovieItemBinding.bind(itemView)
+    private val binding: MoviesListMovieItemBinding = MoviesListMovieItemBinding.bind(itemView)
 
     fun onBind(movie: Movie) {
         binding.ivFilmPoster.setImageResource(movie.posterPath)
@@ -41,7 +41,7 @@ class MovieListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         binding.tvDuration.text = duration
     }
 
-    fun setRating(rating: Int) {
+    private fun setRating(rating: Int) {
         val stars = listOf<ImageView>(
             binding.star1,
             binding.star2,

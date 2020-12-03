@@ -4,12 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/movie_item_card_view"
-    android:layout_width="170dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/background_black"
     app:cardCornerRadius="@dimen/dimen_2x"
     app:strokeColor="@color/reviews_color"
-    app:strokeWidth="1dp">
+    app:strokeWidth="1dp"
+    android:layout_margin="6dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,29 +19,37 @@
 
         <ImageView
             android:id="@+id/iv_film_poster"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="2dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="2dp"
             android:contentDescription="@null"
+            android:adjustViewBounds="true"
+            app:layout_constraintDimensionRatio="v,166:246"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/movie_colored" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline"
+            app:layout_constraintGuide_percent=".45"
+            android:orientation="horizontal"/>
 
         <View
             android:id="@+id/view_gradient"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="2dp"
-            android:layout_marginTop="140dp"
             android:layout_marginEnd="2dp"
             android:background="@drawable/gradient"
             app:layout_constraintBottom_toBottomOf="@id/iv_film_poster"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@id/iv_film_poster"
+            app:layout_constraintStart_toStartOf="@id/iv_film_poster"
+            app:layout_constraintTop_toTopOf="@id/guideline" />
 
         <TextView
             android:id="@+id/tv_age_pg"

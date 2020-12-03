@@ -33,12 +33,7 @@ class FragmentMoviesList : Fragment() {
     }
 
     private fun bindRecyclerView() {
-        binding.rvMoviesList?.adapter = MovieListAdapter(MovieStorage.getMovies())
-        binding.rvMoviesList?.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-        binding.rvMoviesList?.addItemDecoration(
-            DividerItemDecoration(
-                context, DividerItemDecoration.VERTICAL
-            )
-        )
+        binding.rvMoviesList.adapter = MovieListAdapter(MovieStorage.getMovies())
+        binding.rvMoviesList.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
     }
 }
