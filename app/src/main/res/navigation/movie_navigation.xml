@@ -12,6 +12,9 @@
         <action
             android:id="@+id/navigate_to_movies_list"
             app:destination="@id/fragmentMoviesList" />
+        <argument
+            android:name="Movie"
+            app:argType="me.podlesnykh.androidacademyapplication.data.Movie" />
     </fragment>
     <fragment
         android:id="@+id/fragmentMoviesList"
@@ -20,6 +23,6 @@
         tools:layout="@layout/fragment_movies_list">
         <action
             android:id="@+id/navigate_to_movie_item"
-            app:destination="@id/fragmentMovieDetails" />
+            app:destination="@id/fragmentMovieDetails"/>
     </fragment>
 </navigation>
