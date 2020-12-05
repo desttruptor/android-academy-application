@@ -15,12 +15,6 @@ data class Movie(
     val duration: Int,
     val backDropPosterLink: String,
     val movieDescription: String,
-    val actor1Name: String,
-    val actor2Name: String,
-    val actor3Name: String,
-    val actor4Name: String,
-    val actor1PhotoLink: String,
-    val actor2PhotoLink: String,
-    val actor3PhotoLink: String,
-    val actor4PhotoLink: String
+    val actorNames: List<String>,
+    val actorPhotoLinks: List<String>
 ) : Parcelable

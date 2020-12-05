@@ -158,126 +158,16 @@
             app:layout_constraintStart_toStartOf="@+id/film_description"
             app:layout_constraintTop_toBottomOf="@+id/film_description" />
 
-        <ImageView
-            android:id="@+id/actor_photo1"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_actors_list"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:src="@drawable/downey"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/actor_photo2"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="@+id/cast"
-            app:layout_constraintTop_toBottomOf="@id/cast" />
-
-        <TextView
-            android:id="@+id/actor_name1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:paddingBottom="@dimen/dimen_4x"
-            android:text="@string/robert_downey_jr"
-            android:textColor="@color/actor_name"
-            android:textSize="@dimen/text_size_actor_name"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/actor_photo1"
-            app:layout_constraintStart_toStartOf="@id/actor_photo1"
-            app:layout_constraintTop_toBottomOf="@id/actor_photo1" />
-
-        <ImageView
-            android:id="@+id/actor_photo2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/dimen_1x"
-            android:adjustViewBounds="true"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:src="@drawable/evans"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/actor_photo3"
-            app:layout_constraintStart_toEndOf="@+id/actor_photo1"
-            app:layout_constraintTop_toTopOf="@id/actor_photo1" />
-
-        <TextView
-            android:id="@+id/actor_name2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:paddingBottom="@dimen/dimen_4x"
-            android:text="@string/chris_evans"
-            android:textColor="@color/actor_name"
-            android:textSize="@dimen/text_size_actor_name"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/actor_photo2"
-            app:layout_constraintStart_toStartOf="@id/actor_photo2"
-            app:layout_constraintTop_toBottomOf="@id/actor_photo2" />
-
-        <ImageView
-            android:id="@+id/actor_photo3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/dimen_1x"
-            android:adjustViewBounds="true"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ruffalo"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/actor_photo4"
-            app:layout_constraintStart_toEndOf="@+id/actor_photo2"
-            app:layout_constraintTop_toTopOf="@id/actor_photo2" />
-
-        <TextView
-            android:id="@+id/actor_name3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:paddingBottom="@dimen/dimen_4x"
-            android:text="@string/mark_ruffalo"
-            android:textColor="@color/actor_name"
-            android:textSize="@dimen/text_size_actor_name"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/actor_photo3"
-            app:layout_constraintStart_toStartOf="@id/actor_photo3"
-            app:layout_constraintTop_toBottomOf="@id/actor_photo3" />
-
-        <ImageView
-            android:id="@+id/actor_photo4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/dimen_1x"
-            android:adjustViewBounds="true"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:src="@drawable/hemsworth"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="@+id/cast"
-            app:layout_constraintStart_toEndOf="@+id/actor_photo3"
-            app:layout_constraintTop_toTopOf="@id/actor_photo3" />
-
-        <TextView
-            android:id="@+id/actor_name4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:paddingBottom="@dimen/dimen_4x"
-            android:text="@string/chris_hemsworth"
-            android:textColor="@color/actor_name"
-            android:textSize="@dimen/text_size_actor_name"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/actor_photo4"
-            app:layout_constraintStart_toStartOf="@id/actor_photo4"
-            app:layout_constraintTop_toBottomOf="@id/actor_photo4" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/cast"
+            app:layout_constraintStart_toStartOf="@id/cast"
+            app:layout_constraintTop_toBottomOf="@id/cast"
+            tools:listitem="@layout/movie_details_actor_item" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
