@@ -47,7 +47,7 @@ class FragmentMovieDetails : Fragment() {
 
         binding.filmDescription.text = args.Movie.movieDescription
 
-        binding.rvActorsList?.apply {
+        binding.rvActorsList.apply {
             adapter = MovieDetailsActorListAdapter(args.Movie.actorNames, args.Movie.actorPhotoLinks)
             layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
         }

@@ -6,11 +6,11 @@
     android:id="@+id/movie_item_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="6dp"
     app:cardBackgroundColor="@color/background_black"
     app:cardCornerRadius="@dimen/dimen_2x"
     app:strokeColor="@color/reviews_color"
-    app:strokeWidth="1dp"
-    android:layout_margin="6dp">
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,11 +21,8 @@
             android:id="@+id/iv_film_poster"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="2dp"
-            android:contentDescription="@null"
             android:adjustViewBounds="true"
+            android:contentDescription="@null"
             app:layout_constraintDimensionRatio="v,166:246"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +30,11 @@
             app:srcCompat="@drawable/movie_colored" />
 
         <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guideline"
-            app:layout_constraintGuide_percent=".45"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".45" />
 
         <View
             android:id="@+id/view_gradient"
