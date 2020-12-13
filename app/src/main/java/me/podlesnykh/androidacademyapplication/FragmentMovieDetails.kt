@@ -43,7 +43,7 @@ class FragmentMovieDetails : Fragment() {
             .load(movie.backdrop)
             .into(binding.ivMovieBackdrop)
 
-        binding.rbRatingBar.rating = movie.ratings/2
+        binding.rbRatingBar.rating = movie.ratings / 2
 
         val reviews = movie.numberOfRatings.toString() + " " + R.string.string_reviews
         binding.reviews.text = reviews

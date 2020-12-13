@@ -1,19 +1,20 @@
 package me.podlesnykh.androidacademyapplication
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import me.podlesnykh.androidacademyapplication.adapters.MovieListAdapter
 import me.podlesnykh.androidacademyapplication.data.Movie
-import me.podlesnykh.androidacademyapplication.databinding.FragmentMoviesListBinding
 import me.podlesnykh.androidacademyapplication.data.loadMovies
-import java.lang.Exception
+import me.podlesnykh.androidacademyapplication.databinding.FragmentMoviesListBinding
 
 class FragmentMoviesList : Fragment() {
 
@@ -42,7 +43,7 @@ class FragmentMoviesList : Fragment() {
         loadMoviesJob.cancel()
     }
 
-    val onClick = fun(movie: Movie){
+    val onClick = fun(movie: Movie) {
         val action = FragmentMoviesListDirections.navigateToMovieItem(movie)
         binding.root.findNavController().navigate(action)
     }

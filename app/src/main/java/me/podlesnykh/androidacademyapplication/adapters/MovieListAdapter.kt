@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import me.podlesnykh.androidacademyapplication.R
-import me.podlesnykh.androidacademyapplication.data.Genre
 import me.podlesnykh.androidacademyapplication.data.Movie
 import me.podlesnykh.androidacademyapplication.databinding.MoviesListMovieItemBinding
 
