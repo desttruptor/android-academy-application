@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import me.podlesnykh.androidacademyapplication.adapters.MovieDetailsActorListAdapter
+import me.podlesnykh.androidacademyapplication.data.Movie
 import me.podlesnykh.androidacademyapplication.databinding.FragmentMovieDetailsBinding
 
 class FragmentMovieDetails : Fragment() {
@@ -33,29 +34,41 @@ class FragmentMovieDetails : Fragment() {
     }
 
     private fun setupView() {
+        val movie = args.Movie
+
+        binding.tvTitle.text = movie.title
+        binding.filmDescription.text = movie.overview
+
         Glide.with(binding.root.context)
-            .load(args.Movie.backDropPosterLink)
+            .load(movie.backdrop)
             .into(binding.ivMovieBackdrop)
 
-        binding.tvAgePg.text = args.Movie.minAge
-        binding.tvTitle.text = args.Movie.title
-        binding.tvTagline.text = args.Movie.genre
-        binding.rbRatingBar.rating = args.Movie.rating.toFloat()
+        binding.rbRatingBar.rating = movie.ratings/2
 
-        val reviews = args.Movie.reviewsCount.toString() + " " + context?.getString(R.string.string_reviews)
+        val reviews = movie.numberOfRatings.toString() + " " + R.string.string_reviews
         binding.reviews.text = reviews
 
-        binding.filmDescription.text = args.Movie.movieDescription
+        val minAge = movie.minimumAge.toString() + R.string.plus_symbol
+        binding.tvAgePg.text = minAge
+
+        binding.tvTagline.text = genreStringConstructor(movie)
 
         binding.rvActorsList.apply {
-            adapter = MovieDetailsActorListAdapter(args.Movie.actorNames, args.Movie.actorPhotoLinks)
+            adapter = MovieDetailsActorListAdapter(movie.actors)
             layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
         }
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun genreStringConstructor(movie: Movie): String {
+        var result = ""
+        for (genre in movie.genres) {
+            result += genre.name + ", "
+        }
+        return result.trim()
     }
 }

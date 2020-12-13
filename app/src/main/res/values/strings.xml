@@ -19,4 +19,5 @@
     <string name="string_reviews">reviews</string>
     <string name="string_duration">min</string>
     <string name="plus_symbol">+</string>
+    <string name="str_min">min</string>
 </resources>

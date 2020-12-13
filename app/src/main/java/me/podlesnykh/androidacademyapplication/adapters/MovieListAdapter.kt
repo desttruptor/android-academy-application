@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import me.podlesnykh.androidacademyapplication.R
+import me.podlesnykh.androidacademyapplication.data.Genre
 import me.podlesnykh.androidacademyapplication.data.Movie
 import me.podlesnykh.androidacademyapplication.databinding.MoviesListMovieItemBinding
 
@@ -22,33 +23,29 @@ class MovieListAdapter(
 
     override fun getItemCount(): Int = movies.size
 
-
     inner class MovieListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding: MoviesListMovieItemBinding = MoviesListMovieItemBinding.bind(itemView)
 
         fun bind(movie: Movie) {
-
-            if (movie.like) {
-                binding.ivLike.setImageResource(R.drawable.ic_like_marked)
-            } else {
-                binding.ivLike.setImageResource(R.drawable.ic_like)
-            }
-
-            Glide.with(binding.root.context)
-                .load(movie.posterLink)
-                .into(binding.ivFilmPoster)
-
-            binding.tvAgePg.text = movie.minAge
-            setRating(movie.rating)
-
-            val reviews = movie.reviewsCount.toString() + " " + itemView.context.getString(R.string.string_reviews)
-            binding.tvReviews.text = reviews
-
-            binding.tvTagline.text = movie.genre
             binding.tvTitle.text = movie.title
 
-            val duration = movie.duration.toString() + " " + itemView.context.getString(R.string.string_duration)
-            binding.tvDuration.text = duration
+            Glide.with(itemView.context)
+                .load(movie.poster)
+                .into(binding.ivFilmPoster)
+
+            val rating = movie.ratings / 2
+            setRating(rating.toInt())
+
+            val reviewsCount = movie.ratings.toString() + " " + R.string.reviews_counter
+            binding.tvReviews.text = reviewsCount
+
+            val age = movie.minimumAge.toString() + R.string.plus_symbol
+            binding.tvAgePg.text = age
+
+            val runtime = movie.runtime.toString() + " " + R.string.str_min
+            binding.tvDuration.text = runtime
+
+            binding.tvTagline.text = genreStringConstructor(movie)
 
             binding.root.setOnClickListener {
                 onClick(movie)
@@ -68,6 +65,14 @@ class MovieListAdapter(
             for (i in 0 until rating) {
                 stars[i].setImageResource(R.drawable.ic_star_icon_marked)
             }
+        }
+
+        private fun genreStringConstructor(movie: Movie): String {
+            var result = ""
+            for (genre in movie.genres) {
+                result += genre.name + ", "
+            }
+            return result.trim()
         }
     }
 }

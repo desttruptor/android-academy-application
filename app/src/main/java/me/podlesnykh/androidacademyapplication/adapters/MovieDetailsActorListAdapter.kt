@@ -9,32 +9,32 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import me.podlesnykh.androidacademyapplication.R
+import me.podlesnykh.androidacademyapplication.data.Actor
 import me.podlesnykh.androidacademyapplication.databinding.MovieDetailsActorItemBinding
 
 class MovieDetailsActorListAdapter(
-    private val actorNames: List<String>,
-    private val actorPhotoLinks: List<String>
+    private val actorsList: List<Actor>
 ) : RecyclerView.Adapter<ActorListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ActorListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_details_actor_item, parent, false))
 
     override fun onBindViewHolder(holder: ActorListViewHolder, position: Int) =
-        holder.bind(actorNames[position], actorPhotoLinks[position])
+        holder.bind(actorsList[position])
 
-    override fun getItemCount() = actorNames.size
+    override fun getItemCount() = actorsList.size
 }
 
 class ActorListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val binding = MovieDetailsActorItemBinding.bind(itemView)
 
-    fun bind(actorName: String, actorPhotoLink: String) {
+    fun bind(actor: Actor) {
         val requestOptions = RequestOptions().transform(CenterCrop(), RoundedCorners(15))
         Glide.with(binding.root.context)
-            .load(actorPhotoLink)
+            .load(actor.picture)
             .apply(requestOptions)
             .into(binding.actorPhoto)
 
-        binding.actorName.text = actorName
+        binding.actorName.text = actor.name
     }
 
 }
