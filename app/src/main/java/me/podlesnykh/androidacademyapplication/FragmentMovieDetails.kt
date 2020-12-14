@@ -3,6 +3,7 @@ package me.podlesnykh.androidacademyapplication
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -45,17 +46,22 @@ class FragmentMovieDetails : Fragment() {
 
         binding.rbRatingBar.rating = movie.ratings / 2
 
-        val reviews = movie.numberOfRatings.toString() + " " + R.string.string_reviews
+        val reviews = movie.numberOfRatings.toString() + " " + binding.root.context.getString(R.string.string_reviews)
         binding.reviews.text = reviews
 
-        val minAge = movie.minimumAge.toString() + R.string.plus_symbol
+        val minAge = movie.minimumAge.toString() + binding.root.context.getString(R.string.plus_symbol)
         binding.tvAgePg.text = minAge
 
         binding.tvTagline.text = genreStringConstructor(movie)
 
-        binding.rvActorsList.apply {
-            adapter = MovieDetailsActorListAdapter(movie.actors)
-            layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
+        if (movie.actors.isEmpty()) {
+            binding.rvActorsList.visibility = GONE
+            binding.cast.visibility = GONE
+        } else {
+            binding.rvActorsList.apply {
+                adapter = MovieDetailsActorListAdapter(movie.actors)
+                layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
+            }
         }
     }
 
@@ -69,6 +75,6 @@ class FragmentMovieDetails : Fragment() {
         for (genre in movie.genres) {
             result += genre.name + ", "
         }
-        return result.trim()
+        return result.substring(0, result.length - 2).trim()
     }
 }

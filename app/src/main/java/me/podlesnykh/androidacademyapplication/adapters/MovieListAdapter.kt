@@ -35,13 +35,13 @@ class MovieListAdapter(
             val rating = movie.ratings / 2
             setRating(rating.toInt())
 
-            val reviewsCount = movie.ratings.toString() + " " + R.string.reviews_counter
+            val reviewsCount = movie.numberOfRatings.toString() + " " + binding.root.context.getString(R.string.string_reviews)
             binding.tvReviews.text = reviewsCount
 
-            val age = movie.minimumAge.toString() + R.string.plus_symbol
+            val age = movie.minimumAge.toString() + binding.root.context.getString(R.string.plus_symbol)
             binding.tvAgePg.text = age
 
-            val runtime = movie.runtime.toString() + " " + R.string.str_min
+            val runtime = movie.runtime.toString() + " " + binding.root.context.getString(R.string.str_min)
             binding.tvDuration.text = runtime
 
             binding.tvTagline.text = genreStringConstructor(movie)
@@ -71,7 +71,7 @@ class MovieListAdapter(
             for (genre in movie.genres) {
                 result += genre.name + ", "
             }
-            return result.trim()
+            return result.substring(0, result.length - 2).trim()
         }
     }
 }
