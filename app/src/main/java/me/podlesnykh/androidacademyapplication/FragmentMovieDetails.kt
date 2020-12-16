@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import me.podlesnykh.androidacademyapplication.adapters.MovieDetailsActorListAdapter
 import me.podlesnykh.androidacademyapplication.data.Movie
+import me.podlesnykh.androidacademyapplication.data.formatGenres
 import me.podlesnykh.androidacademyapplication.databinding.FragmentMovieDetailsBinding
 
 class FragmentMovieDetails : Fragment() {
@@ -23,15 +24,14 @@ class FragmentMovieDetails : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
-        val view = binding.root
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupView()
-
         binding.tvBack.setOnClickListener {
             findNavController().navigate(R.id.navigate_to_movies_list)
         }
-
-        return view
     }
 
     private fun setupView() {
@@ -52,7 +52,7 @@ class FragmentMovieDetails : Fragment() {
         val minAge = movie.minimumAge.toString() + binding.root.context.getString(R.string.plus_symbol)
         binding.tvAgePg.text = minAge
 
-        binding.tvTagline.text = genreStringConstructor(movie)
+        binding.tvTagline.text = formatGenres(movie)
 
         if (movie.actors.isEmpty()) {
             binding.rvActorsList.visibility = GONE
@@ -68,13 +68,5 @@ class FragmentMovieDetails : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun genreStringConstructor(movie: Movie): String {
-        var result = ""
-        for (genre in movie.genres) {
-            result += genre.name + ", "
-        }
-        return result.substring(0, result.length - 2).trim()
     }
 }

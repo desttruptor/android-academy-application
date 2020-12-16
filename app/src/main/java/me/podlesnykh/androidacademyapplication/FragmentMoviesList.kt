@@ -22,19 +22,24 @@ class FragmentMoviesList : Fragment() {
     private val job = Job()
     private val scope = CoroutineScope(job + Dispatchers.Default)
 
+    private val adapter = MovieListAdapter(::openMovieDetailsScreen)
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMoviesListBinding.inflate(inflater, container, false)
-        val view = binding.root
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupRecyclerView()
 
         scope.launch {
-            binding.progress?.visibility = View.VISIBLE
+            showProgress(true)
             moviesList = loadMovies(requireContext())
             withContext(Dispatchers.Main) {
-                bindRecyclerView(moviesList)
+                adapter.submitList(moviesList)
+                showProgress(false)
             }
         }
-
-        return view
     }
 
     override fun onDestroyView() {
@@ -53,9 +58,16 @@ class FragmentMoviesList : Fragment() {
         )
     }
 
-    private fun bindRecyclerView(moviesList: List<Movie>) {
-        binding.rvMoviesList.adapter = MovieListAdapter(moviesList, ::openMovieDetailsScreen)
+    private fun setupRecyclerView() {
+        binding.rvMoviesList.adapter = adapter
         binding.rvMoviesList.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-        binding.progress?.visibility = View.GONE
+    }
+
+    private fun showProgress(isShow: Boolean) {
+        if (isShow) {
+            binding.progress?.visibility = View.VISIBLE
+        } else {
+            binding.progress?.visibility = View.GONE
+        }
     }
 }
