@@ -12,10 +12,9 @@ import me.podlesnykh.androidacademyapplication.data.formatGenres
 import me.podlesnykh.androidacademyapplication.databinding.MoviesListMovieItemBinding
 
 class MovieListAdapter(
+    private var movies: List<Movie>,
     private val onClick: (Movie) -> Unit
 ) : RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
-
-    private var movies: List<Movie> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         MovieListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movies_list_movie_item, parent, false))
@@ -30,11 +29,6 @@ class MovieListAdapter(
         val diffResult = DiffUtil.calculateDiff(MovieListDiffUtilsCallback(oldList, newList))
         movies = newList
         diffResult.dispatchUpdatesTo(this)
-    }
-
-    fun updateMovies(newMoviesList: List<Movie>) {
-        val movieDiffResult = DiffUtil.calculateDiff(MovieListDiffUtilsCallback(this.movies, newMoviesList))
-        movieDiffResult.dispatchUpdatesTo(this)
     }
 
     inner class MovieListDiffUtilsCallback(

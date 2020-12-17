@@ -18,11 +18,11 @@ class FragmentMoviesList : Fragment() {
     private var _binding: FragmentMoviesListBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var moviesList: List<Movie>
+    private var moviesList: List<Movie> = listOf()
     private val job = Job()
     private val scope = CoroutineScope(job + Dispatchers.Default)
 
-    private val adapter = MovieListAdapter(::openMovieDetailsScreen)
+    private val adapter = MovieListAdapter(moviesList, ::openMovieDetailsScreen)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMoviesListBinding.inflate(inflater, container, false)
@@ -66,8 +66,10 @@ class FragmentMoviesList : Fragment() {
     private fun showProgress(isShow: Boolean) {
         if (isShow) {
             binding.progress?.visibility = View.VISIBLE
+            binding.rvMoviesList.visibility = View.GONE
         } else {
             binding.progress?.visibility = View.GONE
+            binding.rvMoviesList.visibility = View.VISIBLE
         }
     }
 }

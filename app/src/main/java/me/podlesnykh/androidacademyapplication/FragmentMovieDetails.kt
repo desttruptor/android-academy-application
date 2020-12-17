@@ -1,4 +1,4 @@
-package me.podlesnykh.androidacademyapplication
+    package me.podlesnykh.androidacademyapplication
 
 import android.os.Bundle
 import android.view.LayoutInflater
