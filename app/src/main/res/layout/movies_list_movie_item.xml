@@ -137,7 +137,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/star5"
             app:layout_constraintStart_toEndOf="@+id/star5"
             app:layout_constraintTop_toTopOf="@id/star5"
-            app:layout_constraintVertical_bias="0.26"
+            app:layout_constraintVertical_bias="0.19999999"
             tools:ignore="SmallSp" />
 
         <TextView
@@ -162,9 +162,11 @@
             android:textColor="@color/white_text"
             android:textSize="@dimen/text_size_default"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_duration"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_tagline"
-            app:layout_constraintTop_toBottomOf="@+id/iv_film_poster" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_film_poster"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/tv_duration"
@@ -178,6 +180,7 @@
             android:textColor="@color/reviews_color"
             android:textSize="8sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
             tools:ignore="SmallSp" />

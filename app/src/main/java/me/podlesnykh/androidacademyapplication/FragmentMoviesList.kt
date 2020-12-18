@@ -31,9 +31,8 @@ class FragmentMoviesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecyclerView()
-
+        showProgress(true)
         scope.launch {
-            showProgress(true)
             moviesList = loadMovies(requireContext())
             withContext(Dispatchers.Main) {
                 adapter.submitList(moviesList)
