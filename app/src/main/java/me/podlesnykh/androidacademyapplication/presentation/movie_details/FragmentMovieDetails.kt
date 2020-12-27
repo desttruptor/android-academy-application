@@ -1,4 +1,4 @@
-    package me.podlesnykh.androidacademyapplication.movie_details
+package me.podlesnykh.androidacademyapplication.presentation.movie_details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import me.podlesnykh.androidacademyapplication.R
-import me.podlesnykh.androidacademyapplication.movie_details.adapters.MovieDetailsActorListAdapter
-import me.podlesnykh.androidacademyapplication.domain.movie.formatGenres
 import me.podlesnykh.androidacademyapplication.databinding.FragmentMovieDetailsBinding
+import me.podlesnykh.androidacademyapplication.domain.movie.formatGenres
+import me.podlesnykh.androidacademyapplication.movie_details.adapters.MovieDetailsActorListAdapter
 
 class FragmentMovieDetails : Fragment() {
 

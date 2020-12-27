@@ -1,4 +1,4 @@
-package me.podlesnykh.androidacademyapplication.presentation
+package me.podlesnykh.androidacademyapplication
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

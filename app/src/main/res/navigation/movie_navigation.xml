@@ -6,7 +6,7 @@
     app:startDestination="@id/fragmentMoviesList">
     <fragment
         android:id="@+id/fragmentMovieDetails"
-        android:name="me.podlesnykh.androidacademyapplication.movie_details.FragmentMovieDetails"
+        android:name="me.podlesnykh.androidacademyapplication.presentation.movie_details.FragmentMovieDetails"
         android:label="FragmentMovieDetails"
         tools:layout="@layout/fragment_movie_details">
         <action
@@ -14,7 +14,7 @@
             app:destination="@id/fragmentMoviesList" />
         <argument
             android:name="Movie"
-            app:argType="me.podlesnykh.androidacademyapplication.data.Movie" />
+            app:argType="me.podlesnykh.androidacademyapplication.domain.movie.Movie" />
     </fragment>
     <fragment
         android:id="@+id/fragmentMoviesList"
