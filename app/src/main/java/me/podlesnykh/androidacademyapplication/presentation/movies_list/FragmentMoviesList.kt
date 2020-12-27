@@ -1,5 +1,6 @@
-package me.podlesnykh.androidacademyapplication
+package me.podlesnykh.androidacademyapplication.movies_list
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,20 +8,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.coroutines.*
-import me.podlesnykh.androidacademyapplication.adapters.MovieListAdapter
-import me.podlesnykh.androidacademyapplication.data.Movie
-import me.podlesnykh.androidacademyapplication.data.loadMovies
+import me.podlesnykh.androidacademyapplication.R
 import me.podlesnykh.androidacademyapplication.databinding.FragmentMoviesListBinding
+import me.podlesnykh.androidacademyapplication.domain.movie.Movie
+import me.podlesnykh.androidacademyapplication.movies_list.adapters.MovieListAdapter
+import me.podlesnykh.androidacademyapplication.presentation.movies_list.MovieListViewModelFactory
+import me.podlesnykh.androidacademyapplication.presentation.movies_list.MoviesListViewModel
 
 class FragmentMoviesList : Fragment() {
+
+    private val viewModel = MovieListViewModelFactory(requireContext() as Application).create(MoviesListViewModel::class.java)
 
     private var _binding: FragmentMoviesListBinding? = null
     private val binding get() = _binding!!
 
     private var moviesList: List<Movie> = listOf()
-    private val job = Job()
-    private val scope = CoroutineScope(job + Dispatchers.Default)
 
     private val adapter = MovieListAdapter(moviesList, ::openMovieDetailsScreen)
 
@@ -31,14 +33,7 @@ class FragmentMoviesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecyclerView()
-        showProgress(true)
-        scope.launch {
-            moviesList = loadMovies(requireContext())
-            withContext(Dispatchers.Main) {
-                adapter.submitList(moviesList)
-                showProgress(false)
-            }
-        }
+        viewModel.state.observe(this.viewLifecycleOwner, this::setState)
     }
 
     override fun onDestroyView() {
@@ -48,7 +43,6 @@ class FragmentMoviesList : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        scope.cancel()
     }
 
     private fun openMovieDetailsScreen(movie: Movie) {
@@ -62,6 +56,27 @@ class FragmentMoviesList : Fragment() {
         binding.rvMoviesList.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
     }
 
+    private fun setState(state: MoviesListViewModel.State) =
+        when (state) {
+            is MoviesListViewModel.State.Default -> {
+                showProgress(false)
+                showErrorMessage(false)
+            }
+            is MoviesListViewModel.State.Loading -> {
+                showProgress(true)
+                showErrorMessage(false)
+            }
+            is MoviesListViewModel.State.LoadingError -> {
+                showProgress(false)
+                showErrorMessage(true)
+            }
+            is MoviesListViewModel.State.Success -> {
+                showProgress(false)
+                showErrorMessage(false)
+                adapter.submitList(viewModel.mutableMoviesList.value!!)
+            }
+        }
+
     private fun showProgress(isShow: Boolean) {
         if (isShow) {
             binding.progress?.visibility = View.VISIBLE
@@ -69,6 +84,14 @@ class FragmentMoviesList : Fragment() {
         } else {
             binding.progress?.visibility = View.GONE
             binding.rvMoviesList.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showErrorMessage(isShow: Boolean) {
+        if (isShow) {
+            binding.tvLabelMoviesList.text = getString(R.string.loading_error)
+        } else {
+            binding.tvLabelMoviesList.text = getString(R.string.label_movies_list)
         }
     }
 }

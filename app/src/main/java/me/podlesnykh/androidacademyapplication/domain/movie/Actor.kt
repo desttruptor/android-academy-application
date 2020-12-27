@@ -1,7 +1,7 @@
-package me.podlesnykh.androidacademyapplication.data
+package me.podlesnykh.androidacademyapplication.domain.movie
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Actor(

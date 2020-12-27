@@ -1,4 +1,4 @@
-package me.podlesnykh.androidacademyapplication.data
+package me.podlesnykh.androidacademyapplication.domain.loadMovie
 
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
@@ -7,6 +7,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import me.podlesnykh.androidacademyapplication.domain.movie.Actor
+import me.podlesnykh.androidacademyapplication.domain.movie.Genre
+import me.podlesnykh.androidacademyapplication.domain.movie.Movie
 
 private val jsonFormat = Json { ignoreUnknownKeys = true }
 
@@ -87,22 +90,22 @@ internal fun parseMovies(
 
     return jsonMovies.map { jsonMovie ->
         @Suppress("unused")
-        Movie(
-            id = jsonMovie.id,
-            title = jsonMovie.title,
-            overview = jsonMovie.overview,
-            poster = jsonMovie.posterPicture,
-            backdrop = jsonMovie.backdropPicture,
-            ratings = jsonMovie.ratings,
-            numberOfRatings = jsonMovie.votesCount,
-            minimumAge = if (jsonMovie.adult) 16 else 13,
-            runtime = jsonMovie.runtime,
-            genres = jsonMovie.genreIds.map {
-                genresMap[it] ?: throw IllegalArgumentException("Genre not found")
-            },
-            actors = jsonMovie.actors.map {
-                actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
-            }
-        )
+        (Movie(
+        id = jsonMovie.id,
+        title = jsonMovie.title,
+        overview = jsonMovie.overview,
+        poster = jsonMovie.posterPicture,
+        backdrop = jsonMovie.backdropPicture,
+        ratings = jsonMovie.ratings,
+        numberOfRatings = jsonMovie.votesCount,
+        minimumAge = if (jsonMovie.adult) 16 else 13,
+        runtime = jsonMovie.runtime,
+        genres = jsonMovie.genreIds.map {
+            genresMap[it] ?: throw IllegalArgumentException("Genre not found")
+        },
+        actors = jsonMovie.actors.map {
+            actorsMap[it] ?: throw IllegalArgumentException("Actor not found")
+        }
+    ))
     }
 }

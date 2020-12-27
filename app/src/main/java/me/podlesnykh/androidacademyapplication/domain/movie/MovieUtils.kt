@@ -1,4 +1,4 @@
-package me.podlesnykh.androidacademyapplication.data
+package me.podlesnykh.androidacademyapplication.domain.movie
 
 fun formatGenres(movie: Movie): String {
     var result = ""

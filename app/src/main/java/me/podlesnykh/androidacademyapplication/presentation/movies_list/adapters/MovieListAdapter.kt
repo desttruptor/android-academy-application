@@ -1,4 +1,4 @@
-package me.podlesnykh.androidacademyapplication.adapters
+package me.podlesnykh.androidacademyapplication.movies_list.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import me.podlesnykh.androidacademyapplication.R
-import me.podlesnykh.androidacademyapplication.data.Movie
-import me.podlesnykh.androidacademyapplication.data.formatGenres
 import me.podlesnykh.androidacademyapplication.databinding.MoviesListMovieItemBinding
+import me.podlesnykh.androidacademyapplication.domain.movie.Movie
+import me.podlesnykh.androidacademyapplication.domain.movie.formatGenres
 
 class MovieListAdapter(
     private var movies: List<Movie>,

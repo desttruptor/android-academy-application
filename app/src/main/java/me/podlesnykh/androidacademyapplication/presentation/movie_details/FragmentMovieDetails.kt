@@ -1,4 +1,4 @@
-    package me.podlesnykh.androidacademyapplication
+    package me.podlesnykh.androidacademyapplication.movie_details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import me.podlesnykh.androidacademyapplication.adapters.MovieDetailsActorListAdapter
-import me.podlesnykh.androidacademyapplication.data.Movie
-import me.podlesnykh.androidacademyapplication.data.formatGenres
+import me.podlesnykh.androidacademyapplication.R
+import me.podlesnykh.androidacademyapplication.movie_details.adapters.MovieDetailsActorListAdapter
+import me.podlesnykh.androidacademyapplication.domain.movie.formatGenres
 import me.podlesnykh.androidacademyapplication.databinding.FragmentMovieDetailsBinding
 
 class FragmentMovieDetails : Fragment() {

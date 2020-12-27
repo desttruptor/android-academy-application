@@ -1,4 +1,4 @@
-package me.podlesnykh.androidacademyapplication.adapters
+package me.podlesnykh.androidacademyapplication.movie_details.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import me.podlesnykh.androidacademyapplication.R
-import me.podlesnykh.androidacademyapplication.data.Actor
+import me.podlesnykh.androidacademyapplication.domain.movie.Actor
 import me.podlesnykh.androidacademyapplication.databinding.MovieDetailsActorItemBinding
 
 class MovieDetailsActorListAdapter(

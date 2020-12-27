@@ -6,7 +6,7 @@
     app:startDestination="@id/fragmentMoviesList">
     <fragment
         android:id="@+id/fragmentMovieDetails"
-        android:name="me.podlesnykh.androidacademyapplication.FragmentMovieDetails"
+        android:name="me.podlesnykh.androidacademyapplication.movie_details.FragmentMovieDetails"
         android:label="FragmentMovieDetails"
         tools:layout="@layout/fragment_movie_details">
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentMoviesList"
-        android:name="me.podlesnykh.androidacademyapplication.FragmentMoviesList"
+        android:name="me.podlesnykh.androidacademyapplication.movies_list.FragmentMoviesList"
         android:label="FragmentMoviesList"
         tools:layout="@layout/fragment_movies_list">
         <action
