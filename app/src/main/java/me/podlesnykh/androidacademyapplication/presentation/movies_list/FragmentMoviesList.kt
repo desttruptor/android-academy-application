@@ -2,6 +2,7 @@ package me.podlesnykh.androidacademyapplication.movies_list
 
 import android.app.Application
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import me.podlesnykh.androidacademyapplication.R
 import me.podlesnykh.androidacademyapplication.databinding.FragmentMoviesListBinding
 import me.podlesnykh.androidacademyapplication.domain.movie.Movie
@@ -36,7 +38,8 @@ class FragmentMoviesList : Fragment() {
         setupRecyclerView()
         viewModel = ViewModelProvider(this, MovieListViewModelFactory(requireActivity().application))
             .get(MoviesListViewModel::class.java)
-        viewModel.state.observe(this.viewLifecycleOwner, this::setState)
+        viewModel.mutableMoviesList.observe(this.viewLifecycleOwner, this::setState)
+        showProgress(true)
         viewModel.getMoviesList()
     }
 
@@ -53,29 +56,15 @@ class FragmentMoviesList : Fragment() {
 
     private fun setupRecyclerView() {
         binding.rvMoviesList.adapter = adapter
+        adapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
         binding.rvMoviesList.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
     }
 
-    private fun setState(state: MoviesListViewModel.State) =
-        when (state) {
-            is MoviesListViewModel.State.Success -> {
-                showProgress(false)
-                showErrorMessage(false)
-                adapter.submitList(viewModel.mutableMoviesList.value ?: listOf())
-            }
-            is MoviesListViewModel.State.Default -> {
-                showProgress(false)
-                showErrorMessage(false)
-            }
-            is MoviesListViewModel.State.Loading -> {
-                showProgress(true)
-                showErrorMessage(false)
-            }
-            is MoviesListViewModel.State.LoadingError -> {
-                showProgress(false)
-                showErrorMessage(true)
-            }
-        }
+    private fun setState(listMovie: List<Movie>) {
+        showProgress(false)
+        adapter.submitList(listMovie)
+        adapter.notifyDataSetChanged()
+    }
 
     private fun showProgress(isShow: Boolean) {
         if (isShow) {
@@ -84,14 +73,6 @@ class FragmentMoviesList : Fragment() {
         } else {
             binding.progress?.visibility = View.GONE
             binding.rvMoviesList.visibility = View.VISIBLE
-        }
-    }
-
-    private fun showErrorMessage(isShow: Boolean) {
-        if (isShow) {
-            binding.tvLabelMoviesList.text = getString(R.string.loading_error)
-        } else {
-            binding.tvLabelMoviesList.text = getString(R.string.label_movies_list)
         }
     }
 }
