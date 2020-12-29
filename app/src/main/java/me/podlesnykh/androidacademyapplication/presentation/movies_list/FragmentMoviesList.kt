@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import me.podlesnykh.androidacademyapplication.R
@@ -17,7 +18,7 @@ import me.podlesnykh.androidacademyapplication.presentation.movies_list.MoviesLi
 
 class FragmentMoviesList : Fragment() {
 
-    private val viewModel = MovieListViewModelFactory(requireContext() as Application).create(MoviesListViewModel::class.java)
+    private lateinit var viewModel: MoviesListViewModel
 
     private var _binding: FragmentMoviesListBinding? = null
     private val binding get() = _binding!!
@@ -33,16 +34,15 @@ class FragmentMoviesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecyclerView()
+        viewModel = ViewModelProvider(this, MovieListViewModelFactory(requireActivity().application))
+            .get(MoviesListViewModel::class.java)
         viewModel.state.observe(this.viewLifecycleOwner, this::setState)
+        viewModel.getMoviesList()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     private fun openMovieDetailsScreen(movie: Movie) {
@@ -58,6 +58,11 @@ class FragmentMoviesList : Fragment() {
 
     private fun setState(state: MoviesListViewModel.State) =
         when (state) {
+            is MoviesListViewModel.State.Success -> {
+                showProgress(false)
+                showErrorMessage(false)
+                adapter.submitList(viewModel.mutableMoviesList.value ?: listOf())
+            }
             is MoviesListViewModel.State.Default -> {
                 showProgress(false)
                 showErrorMessage(false)
@@ -69,11 +74,6 @@ class FragmentMoviesList : Fragment() {
             is MoviesListViewModel.State.LoadingError -> {
                 showProgress(false)
                 showErrorMessage(true)
-            }
-            is MoviesListViewModel.State.Success -> {
-                showProgress(false)
-                showErrorMessage(false)
-                adapter.submitList(viewModel.mutableMoviesList.value!!)
             }
         }
 

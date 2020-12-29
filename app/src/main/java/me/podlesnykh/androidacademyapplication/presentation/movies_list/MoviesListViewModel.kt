@@ -17,16 +17,11 @@ class MoviesListViewModel(private val interactor: LoadMovieInteractor) : ViewMod
     private val _mutableState = MutableLiveData<State>(State.Default())
     val state: LiveData<State> get() = _mutableState
 
-    init {
-        getMoviesList()
-    }
-
-    private fun getMoviesList() {
+    fun getMoviesList() {
         viewModelScope.launch {
             _mutableState.value = State.Loading()
 
-            val movieLoadingResult = interactor.loadMovie(_mutableMoviesList)
-            val newState = when (movieLoadingResult) {
+            val newState = when (interactor.loadMovie(_mutableMoviesList)) {
                 is LoadingResult.Error -> State.LoadingError()
                 is LoadingResult.Success -> State.Success()
                 else -> State.LoadingError()
