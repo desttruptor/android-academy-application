@@ -48,11 +48,12 @@
 
         <TextView
             android:id="@+id/tv_age_pg"
-            android:layout_width="@dimen/dimen_6x"
-            android:layout_height="@dimen/dimen_6x"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
             android:layout_marginStart="@dimen/dimen_2x"
             android:layout_marginTop="@dimen/dimen_2x"
             android:alpha=".9"
+            android:includeFontPadding="false"
             android:background="@drawable/rectangle_rounded"
             android:gravity="center"
             android:text="@string/label_age_pg"

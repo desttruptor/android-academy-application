@@ -3,17 +3,12 @@ package me.podlesnykh.androidacademyapplication.presentation.movie_details
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import me.podlesnykh.androidacademyapplication.R
 import me.podlesnykh.androidacademyapplication.databinding.FragmentMovieDetailsBinding
-import me.podlesnykh.androidacademyapplication.domain.movie.formatGenres
-import me.podlesnykh.androidacademyapplication.movie_details.adapters.MovieDetailsActorListAdapter
 
 class FragmentMovieDetails : Fragment() {
 
@@ -35,8 +30,8 @@ class FragmentMovieDetails : Fragment() {
     }
 
     private fun setupView() {
-        val movie = args.Movie
-
+        /* TODO rewrite with new logic
+        val movieId = args.movieId
         binding.tvTitle.text = movie.title
         binding.filmDescription.text = movie.overview
 
@@ -63,6 +58,7 @@ class FragmentMovieDetails : Fragment() {
                 layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
             }
         }
+         */
     }
 
     override fun onDestroyView() {

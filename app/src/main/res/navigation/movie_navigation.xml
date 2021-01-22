@@ -13,8 +13,8 @@
             android:id="@+id/navigate_to_movies_list"
             app:destination="@id/fragmentMoviesList" />
         <argument
-            android:name="Movie"
-            app:argType="me.podlesnykh.androidacademyapplication.domain.movie.Movie" />
+            android:name="movieId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/fragmentMoviesList"

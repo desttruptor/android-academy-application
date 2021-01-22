@@ -1,8 +1,6 @@
 package me.podlesnykh.androidacademyapplication.movies_list
 
-import android.app.Application
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,23 +9,26 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import me.podlesnykh.androidacademyapplication.R
 import me.podlesnykh.androidacademyapplication.databinding.FragmentMoviesListBinding
-import me.podlesnykh.androidacademyapplication.domain.movie.Movie
 import me.podlesnykh.androidacademyapplication.movies_list.adapters.MovieListAdapter
+import me.podlesnykh.androidacademyapplication.network.Repository
+import me.podlesnykh.androidacademyapplication.network.pojo.MoviesTopRatedPage
+import me.podlesnykh.androidacademyapplication.network.pojo.ResultsItem
 import me.podlesnykh.androidacademyapplication.presentation.movies_list.MovieListViewModelFactory
 import me.podlesnykh.androidacademyapplication.presentation.movies_list.MoviesListViewModel
 
 class FragmentMoviesList : Fragment() {
 
-    private lateinit var viewModel: MoviesListViewModel
-
     private var _binding: FragmentMoviesListBinding? = null
     private val binding get() = _binding!!
 
-    private var moviesList: List<Movie> = listOf()
-
-    private val adapter = MovieListAdapter(moviesList, ::openMovieDetailsScreen)
+    private lateinit var viewModel: MoviesListViewModel
+    private var moviesList: List<ResultsItem> = listOf()
+    private val adapter by lazy {
+        MovieListAdapter(moviesList, imagesBaseUrl, ::openMovieDetailsScreen)
+    }
+    private val repository = Repository()
+    private var imagesBaseUrl: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMoviesListBinding.inflate(inflater, container, false)
@@ -35,12 +36,13 @@ class FragmentMoviesList : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupRecyclerView()
-        viewModel = ViewModelProvider(this, MovieListViewModelFactory(requireActivity().application))
-            .get(MoviesListViewModel::class.java)
-        viewModel.mutableMoviesList.observe(this.viewLifecycleOwner, this::setState)
         showProgress(true)
-        viewModel.getMoviesList()
+        viewModel = ViewModelProvider(this, MovieListViewModelFactory(repository)).get(MoviesListViewModel::class.java)
+        viewModel.getConfiguration()
+        imagesBaseUrl = viewModel.imagesBaseUrl.value
+        viewModel.getMoviesTopRatedPage()
+        viewModel.mutableMoviesListPage.observe(viewLifecycleOwner, this::setState)
+        setupRecyclerView()
     }
 
     override fun onDestroyView() {
@@ -48,9 +50,9 @@ class FragmentMoviesList : Fragment() {
         _binding = null
     }
 
-    private fun openMovieDetailsScreen(movie: Movie) {
+    private fun openMovieDetailsScreen(movieId: Int) {
         findNavController().navigate(
-            FragmentMoviesListDirections.navigateToMovieItem(movie)
+            FragmentMoviesListDirections.navigateToMovieItem(movieId)
         )
     }
 
@@ -60,14 +62,14 @@ class FragmentMoviesList : Fragment() {
         binding.rvMoviesList.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
     }
 
-    private fun setState(listMovie: List<Movie>) {
+    private fun setState(moviesPage: MoviesTopRatedPage) {
         showProgress(false)
-        adapter.submitList(listMovie)
+        adapter.submitList(moviesPage.results)
         adapter.notifyDataSetChanged()
     }
 
-    private fun showProgress(isShow: Boolean) {
-        if (isShow) {
+    private fun showProgress(isShown: Boolean) {
+        if (isShown) {
             binding.progress?.visibility = View.VISIBLE
             binding.rvMoviesList.visibility = View.GONE
         } else {

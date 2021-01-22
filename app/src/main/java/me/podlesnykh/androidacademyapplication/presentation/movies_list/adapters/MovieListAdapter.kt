@@ -5,15 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import me.podlesnykh.androidacademyapplication.R
 import me.podlesnykh.androidacademyapplication.databinding.MoviesListMovieItemBinding
-import me.podlesnykh.androidacademyapplication.domain.movie.Movie
-import me.podlesnykh.androidacademyapplication.domain.movie.formatGenres
+import me.podlesnykh.androidacademyapplication.network.pojo.ResultsItem
 
 class MovieListAdapter(
-    private var movies: List<Movie>,
-    private val onClick: (Movie) -> Unit
+    private var movies: List<ResultsItem>,
+    private val imagesBaseUrl: String?,
+    private val onClick: (Int) -> Unit
 ) : RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -24,16 +23,16 @@ class MovieListAdapter(
 
     override fun getItemCount(): Int = movies.size
 
-    fun submitList(newList: List<Movie>) {
+    fun submitList(newList: List<ResultsItem>?) {
         val oldList = movies
-        val diffResult = DiffUtil.calculateDiff(MovieListDiffUtilsCallback(oldList, newList))
+        val diffResult = DiffUtil.calculateDiff(MovieListDiffUtilsCallback(oldList, newList ?: throw IllegalStateException("Movies list is null")))
         movies = newList
         diffResult.dispatchUpdatesTo(this)
     }
 
     inner class MovieListDiffUtilsCallback(
-        private val oldMovieList: List<Movie>,
-        private val newMovieList: List<Movie>,
+        private val oldMovieList: List<ResultsItem>,
+        private val newMovieList: List<ResultsItem>,
     ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int = oldMovieList.size
 
@@ -55,33 +54,13 @@ class MovieListAdapter(
     inner class MovieListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding: MoviesListMovieItemBinding = MoviesListMovieItemBinding.bind(itemView)
 
-        fun bind(movie: Movie) {
+        fun bind(movie: ResultsItem) {
+            // TODO display everything on ui
+
             binding.tvTitle.text = movie.title
-
-            Glide.with(itemView.context)
-                .load(movie.poster)
-                .into(binding.ivFilmPoster)
-
-            val rating = movie.ratings / 2
-            setRating(rating.toInt())
-
-            val reviewsCount = movie.numberOfRatings.toString() + " " + binding.root.context.getString(R.string.string_reviews)
-            binding.tvReviews.text = reviewsCount
-
-            val age = movie.minimumAge.toString() + binding.root.context.getString(R.string.plus_symbol)
-            binding.tvAgePg.text = age
-
-            val runtime = movie.runtime.toString() + " " + binding.root.context.getString(R.string.str_min)
-            binding.tvDuration.text = runtime
-
-            binding.tvTagline.text = formatGenres(movie)
-
-            binding.root.setOnClickListener {
-                onClick(movie)
-            }
         }
 
-        // setting red stars to show rating
+        // setting stars to show rating
         private fun setRating(rating: Int) {
             val stars = listOf(
                 binding.star1,
