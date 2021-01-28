@@ -77,7 +77,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_age_pg" />
 
         <TextView
-            android:id="@+id/tv_tagline"
+            android:id="@+id/tv_genres"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_1x"
@@ -98,8 +98,8 @@
             android:rating="4"
             android:stepSize="1"
             android:theme="@style/small.rating.bar"
-            app:layout_constraintStart_toStartOf="@+id/tv_tagline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tagline" />
+            app:layout_constraintStart_toStartOf="@+id/tv_genres"
+            app:layout_constraintTop_toBottomOf="@+id/tv_genres" />
 
         <TextView
             android:id="@+id/reviews"
@@ -126,7 +126,7 @@
             android:textColor="@color/white_text"
             android:textSize="@dimen/text_size_default"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/tv_tagline"
+            app:layout_constraintEnd_toEndOf="@+id/tv_genres"
             app:layout_constraintStart_toStartOf="@+id/rb_rating_bar"
             app:layout_constraintTop_toBottomOf="@id/reviews" />
 

@@ -6,26 +6,21 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import me.podlesnykh.androidacademyapplication.network.Repository
 import me.podlesnykh.androidacademyapplication.network.pojo.MoviesTopRatedPage
+import me.podlesnykh.androidacademyapplication.presentation.models.MovieListItem
 
-class MoviesListViewModel(private val repository: Repository) : ViewModel() {
+class MoviesListViewModel() : ViewModel() {
 
-    private val _mutableMoviesListPage = MutableLiveData<MoviesTopRatedPage>()
-    val mutableMoviesListPage: MutableLiveData<MoviesTopRatedPage> get() = _mutableMoviesListPage
+    private val _mutableMoviesListPage = MutableLiveData<List<MovieListItem>>()
+    val mutableMoviesListPage: MutableLiveData<List<MovieListItem>> get() = _mutableMoviesListPage
 
-    private val _imagesBaseUrl = MutableLiveData<String>()
-    val imagesBaseUrl: MutableLiveData<String> get() = _imagesBaseUrl
-
-    fun getConfiguration() {
-        viewModelScope.launch {
-            val configuration = repository.getConfiguration()
-            _imagesBaseUrl.value = configuration.images?.secureBaseUrl
-        }
+    private val repository by lazy {
+        Repository()
     }
 
-    fun getMoviesTopRatedPage() {
+    fun getMoviesPage() {
         viewModelScope.launch {
-            val moviesPage = repository.getTopRatedMoviesPage()
-            _mutableMoviesListPage.value = moviesPage
+            val page = repository.loadMoviesPage(1)
+            _mutableMoviesListPage.value = page
         }
     }
 }

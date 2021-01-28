@@ -9,8 +9,8 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import me.podlesnykh.androidacademyapplication.R
-import me.podlesnykh.androidacademyapplication.domain.movie.Actor
 import me.podlesnykh.androidacademyapplication.databinding.MovieDetailsActorItemBinding
+import me.podlesnykh.androidacademyapplication.presentation.models.Actor
 
 class MovieDetailsActorListAdapter(
     private val actorsList: List<Actor>
@@ -30,7 +30,7 @@ class ActorListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(actor: Actor) {
         val requestOptions = RequestOptions().transform(CenterCrop(), RoundedCorners(15))
         Glide.with(binding.root.context)
-            .load(actor.picture)
+            .load(actor.profilePicturePath)
             .apply(requestOptions)
             .into(binding.actorPhoto)
 

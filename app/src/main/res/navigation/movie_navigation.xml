@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentMoviesList"
-        android:name="me.podlesnykh.androidacademyapplication.movies_list.FragmentMoviesList"
+        android:name="me.podlesnykh.androidacademyapplication.presentation.movies_list.FragmentMoviesList"
         android:label="FragmentMoviesList"
         tools:layout="@layout/fragment_movies_list">
         <action

@@ -1,17 +1,23 @@
 package me.podlesnykh.androidacademyapplication.movies_list.adapters
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import me.podlesnykh.androidacademyapplication.R
 import me.podlesnykh.androidacademyapplication.databinding.MoviesListMovieItemBinding
-import me.podlesnykh.androidacademyapplication.network.pojo.ResultsItem
+import me.podlesnykh.androidacademyapplication.presentation.helpers.formatGenres
+import me.podlesnykh.androidacademyapplication.presentation.models.MovieListItem
 
 class MovieListAdapter(
-    private var movies: List<ResultsItem>,
-    private val imagesBaseUrl: String?,
+    private var movies: List<MovieListItem>,
     private val onClick: (Int) -> Unit
 ) : RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
 
@@ -23,19 +29,18 @@ class MovieListAdapter(
 
     override fun getItemCount(): Int = movies.size
 
-    fun submitList(newList: List<ResultsItem>?) {
+    fun submitList(newList: List<MovieListItem>) {
         val oldList = movies
-        val diffResult = DiffUtil.calculateDiff(MovieListDiffUtilsCallback(oldList, newList ?: throw IllegalStateException("Movies list is null")))
+        val diffResult = DiffUtil.calculateDiff(MovieListDiffUtilsCallback(oldList, newList))
         movies = newList
         diffResult.dispatchUpdatesTo(this)
     }
 
     inner class MovieListDiffUtilsCallback(
-        private val oldMovieList: List<ResultsItem>,
-        private val newMovieList: List<ResultsItem>,
+        private val oldMovieList: List<MovieListItem>,
+        private val newMovieList: List<MovieListItem>,
     ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int = oldMovieList.size
-
         override fun getNewListSize(): Int = newMovieList.size
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
@@ -54,10 +59,37 @@ class MovieListAdapter(
     inner class MovieListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding: MoviesListMovieItemBinding = MoviesListMovieItemBinding.bind(itemView)
 
-        fun bind(movie: ResultsItem) {
-            // TODO display everything on ui
+        fun bind(movie: MovieListItem) {
+            if (movie.certification.isEmpty()) {
+                binding.tvAgePg.visibility = View.GONE
+            } else {
+                binding.tvAgePg.text = movie.certification
+            }
 
+            //imageView part start
+            binding.backdropProgressBar.visibility = View.VISIBLE
+            Glide.with(itemView.context)
+                .load(movie.posterPath)
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                        return false
+                    }
+
+                    override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                        binding.backdropProgressBar.visibility = View.GONE
+                        return false
+                    }
+                })
+                .into(binding.ivFilmPoster)
+            //imageView part end
+
+            binding.tvGenres.text = formatGenres(movie.genres)
+            setRating(movie.voteAverage)
+            val reviews = movie.voteCount.toString() + " reviews"
+            binding.tvReviews.text = reviews
             binding.tvTitle.text = movie.title
+            val duration = movie.runtime.toString() + "min"
+            binding.tvDuration.text = duration
         }
 
         // setting stars to show rating

@@ -1,8 +1,6 @@
 package me.podlesnykh.androidacademyapplication.presentation.models
 
-import me.podlesnykh.androidacademyapplication.network.pojo.CastItem
-
-data class MovieItem(
+data class MovieDetailedItem(
     val id: Int,
     val certification: String,
     val genres: List<Genre>,

@@ -59,6 +59,9 @@ data class CastItem(
 )
 
 data class ReleaseDatesResultsItem(
+	@field:SerializedName("iso_3166_1")
+	val iso31661: String? = null,
+
 	@field:SerializedName("release_dates")
 	val releaseDates: List<ReleaseDatesItem>? = null,
 )
